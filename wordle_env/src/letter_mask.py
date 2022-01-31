@@ -21,14 +21,23 @@ def create_mask():
 
 class LetterMask:
     def __init__(self):
-        self._mask = create_mask()
+        self.guess_set = [w for w in valid_words + valid_answers]
 
     def __call__(self, guess: str) -> np.ndarray:
-        if len(guess) == 0:
+        if len(guess) == 5 or len(guess) == 0:
+            self.reset()
             return np.ones(26)
 
-        mask = np.ones(26)
+        self.guess_set = [
+            word
+            for word in self.guess_set
+            if word[:len(guess)] == guess
+        ]
 
-        for ix, c in enumerate(guess):
-            mask *= self._mask[convert_letter(c), len(guess) - ix - 1, :]
+        mask = np.zeros(26)
+        for word in self.guess_set:
+            mask[convert_letter(word[len(guess)])] = 1
         return mask
+
+    def reset(self):
+        self.guess_set = [w for w in valid_words + valid_answers]

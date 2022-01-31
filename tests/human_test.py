@@ -10,15 +10,10 @@ def run():
     print(env._answer)
 
     while not done:
-        guess = ""
-        print("Guess: ")
-        while len(guess) < 5:
-            guess += input()
-        if len(guess) > 5:
-            guess = guess[:5]
-
-        for c in guess:
-            obs, reward, done, mask = env.step(ord(c) - ord("a"))
+        c = input()
+        if len(c) > 1:
+            c = c[0]
+        obs, reward, done, mask = env.step(ord(c) - ord("a"))
         env.render()
 
 

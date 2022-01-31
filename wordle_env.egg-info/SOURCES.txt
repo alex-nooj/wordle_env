@@ -1,0 +1,6 @@
+README.md
+setup.py
+wordle_env.egg-info/PKG-INFO
+wordle_env.egg-info/SOURCES.txt
+wordle_env.egg-info/dependency_links.txt
+wordle_env.egg-info/top_level.txt
